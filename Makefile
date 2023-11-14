@@ -3,39 +3,49 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akambou <akambou@student.42barcelo>        +#+  +:+       +#+         #
+#    By: akambou <akambou@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/09/14 18:44:21 by akambou           #+#    #+#              #
-#    Updated: 2023/09/27 22:44:15 by akambou          ###   ########.fr        #
+#    Created: 2023/11/14 09:56:46 by akambou           #+#    #+#              #
+#    Updated: 2023/11/14 09:56:58 by akambou          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
+
+NAME = ft_printf.a
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -I $(INCL)
+CFLAGS = -Wall -Wextra -Werror -o $(INCL)
 
-INCL = printf.h
+INCL = includes/*.h
 
-SRCS = ft_printf.c put_strs.c put_nbrs.c
+SRCS = src/*.c
 
-OBJ = $(SRCS:.c=.o)
+OBJ = $(patsubst src/%.c,obj/%.o,$(SRCS))
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	ar rcs $(NAME) $(OBJ)
-	ranlib $(NAME)
+	@echo "🔨 Building $(NAME)..."
+	@ar rcs $(NAME) $(OBJ)
+	@ranlib $(NAME)
+	@echo "✅ $(NAME) compiled successfully."
 
-%.o : %.c Makefile
-	$(CC) $(CFLAGS) -c $< -o $@
+obj/%.o : src/%.c Makefile
+	@mkdir -p obj
+	@echo "🔨 Compiling $<..."
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo "✅ $< compiled successfully."
 
 clean:
-	rm -rf $(OBJ)
+	@echo "🧹 Cleaning object files..."
+	@rm -rf obj
+	@echo "✅ Object files cleaned successfully."
 
 fclean: clean
-	rm -rf $(NAME)
+	@echo "🧹 Cleaning $(NAME)..."
+	@rm -rf $(NAME)
+	@echo "✅ $(NAME) cleaned successfully."
 
 re: fclean all
 
