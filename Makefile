@@ -6,46 +6,40 @@
 #    By: akambou <akambou@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/14 09:56:46 by akambou           #+#    #+#              #
-#    Updated: 2023/11/14 09:56:58 by akambou          ###   ########.fr        #
+#    Updated: 2023/11/23 00:32:07 by akambou          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-
 NAME = ft_printf.a
 
-CC = cc
+CC = gcc
+RM = rm -rf
 
-CFLAGS = -Wall -Wextra -Werror -o $(INCL)
+CFLAGS = -Wall -Wextra -Werror -o$(INCL)
 
-INCL = includes/*.h
+INCL = includes/ft_printf.h
+OBJ_DIR = obj/
+OBJS = $(SRCS:%.c=$(OBJ_DIR)%.o)
+SRCS = $(wildcard src/*.c )
 
-SRCS = src/*.c
-
-OBJ = $(patsubst src/%.c,obj/%.o,$(SRCS))
+$(OBJ_DIR)%.o: %.c
+	@mkdir -p $(@D)
+	@printf "\033[0;33m\rCompiling -> $< ✅                        \033[0m"
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	@echo "🔨 Building $(NAME)..."
-	@ar rcs $(NAME) $(OBJ)
-	@ranlib $(NAME)
-	@echo "✅ $(NAME) compiled successfully."
-
-obj/%.o : src/%.c Makefile
-	@mkdir -p obj
-	@echo "🔨 Compiling $<..."
-	@$(CC) $(CFLAGS) -c $< -o $@
-	@echo "✅ $< compiled successfully."
+$(NAME): $(OBJS)
+	@ar rcs $(NAME) $(OBJS)
+	@echo -e "\033[0;32mPrintf created 📚\033[0m"
 
 clean:
-	@echo "🧹 Cleaning object files..."
-	@rm -rf obj
-	@echo "✅ Object files cleaned successfully."
+	@$(RM) $(OBJ) $(OBJ_DIR)
+	@echo -e "\033[0;31mCleaned objects 🧹\033[0m"
 
 fclean: clean
-	@echo "🧹 Cleaning $(NAME)..."
-	@rm -rf $(NAME)
-	@echo "✅ $(NAME) cleaned successfully."
+	@$(RM) $(NAME) $(OBJ_DIR) $(OBJ)
+	@echo -e "\033[0;31mCleaned printf 🧹\033[0m"
 
 re: fclean all
 
