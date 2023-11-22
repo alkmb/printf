@@ -3,13 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akambou <akambou@student.42barcelo>        +#+  +:+       +#+        */
+/*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 02:18:32 by akambou           #+#    #+#             */
-/*   Updated: 2023/11/14 09:54:36 by akambou          ###   ########.fr       */
+/*   Updated: 2023/11/21 23:45:24 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdarg.h>
+
 #include "../includes/ft_printf.h"
 
 static int	check_form(char str, va_list *fmt, int *len, int *i)

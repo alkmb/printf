@@ -3,13 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akambou <akambou@student.42barcelo>        +#+  +:+       +#+        */
+/*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 20:00:08 by akambou           #+#    #+#             */
-/*   Updated: 2023/09/18 23:11:30 by akambou          ###   ########.fr       */
+/*   Updated: 2023/11/21 23:45:00 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include <stddef.h>
+#include <stdarg.h>
+#include <unistd.h>
 
 int		ft_printf(const char *str, ...);
 int		ft_char_len(char c, int *len);
